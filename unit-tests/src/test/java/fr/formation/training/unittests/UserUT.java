@@ -3,6 +3,8 @@ package fr.formation.training.unittests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * User avec un username et le username est obligatoire.
@@ -24,9 +26,16 @@ public class UserUT {
 	assertThrows(IllegalArgumentException.class, () -> new User(null));
     }
 
-    @Test
-    void should_get_non_null_username() {
-	User user = new User("Frank");
+    @ParameterizedTest // Remplace @Test
+    @ValueSource(strings = { "India", "Emilie", "Tom", "Catosh", "Anna", "Cial",
+	    "Daria", "Grand Fabien", "Fredopodo le Touriste", "Geo", "Laulau",
+	    "Michael", "Tomas", "Keltou" })
+    void should_get_non_null_username(String username) {
+	// Chaque prenom de "@ValueSource" est utilisé comme
+	// parametre de la méthode qui est du coup appelee
+	// autant de fois qu'il y a d'elements dans le
+	// tableau "strings", chaque element devient "username"
+	User user = new User(username);
 	String actual = user.getUsername();
 	assertNotNull(actual);
     }
