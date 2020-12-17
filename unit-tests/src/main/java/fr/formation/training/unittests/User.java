@@ -5,7 +5,7 @@ public class User {
     private String username;
 
     public User(String username) {
-	if (username == null) {
+	if (username == null) { // null
 	    throw new IllegalArgumentException();
 	}
 	this.username = username;
